@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BinaryToNumber.unity
     guid: 2180b218fc287bf44a26c4e0e56c8b94
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: b47dfbaff627ff34a808d2fb7e48cdcb
   m_configObjects: {}
