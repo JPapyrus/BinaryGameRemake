@@ -41,18 +41,18 @@ public class RandomBinary : MonoBehaviour
             switch (PlayerPrefs.GetString("Difficulty"))
             {
                 case "Easy":
-                    if (PlayerPrefs.GetInt("EasyScore BtN") < score)
-                        PlayerPrefs.SetInt("EasyScore BtN", score);
+                    if (PlayerPrefs.GetInt("EasyScoreBtN") < score)
+                        PlayerPrefs.SetInt("EasyScoreBtN", score);
                     break;
 
                 case "Medium":
-                    if (PlayerPrefs.GetInt("MediumScore BtN") < score)
-                        PlayerPrefs.SetInt("MediumScore BtN", score);
+                    if (PlayerPrefs.GetInt("MediumScoreBtN") < score)
+                        PlayerPrefs.SetInt("MediumScoreBtN", score);
                     break;
 
                 case "Hard":
-                    if (PlayerPrefs.GetInt("HardScore BtN") < score)
-                        PlayerPrefs.SetInt("HardScore BtN", score);
+                    if (PlayerPrefs.GetInt("HardScoreBtN") < score)
+                        PlayerPrefs.SetInt("HardScoreBtN", score);
                     break;
             }
             
@@ -85,18 +85,18 @@ public class RandomBinary : MonoBehaviour
         switch (PlayerPrefs.GetString("Difficulty"))
         {
             case "Easy":
-                if (PlayerPrefs.GetInt("EasyScore BtN") < score)
-                    PlayerPrefs.SetInt("EasyScore BtN", score);
+                if (PlayerPrefs.GetInt("EasyScoreBtN") < score)
+                    PlayerPrefs.SetInt("EasyScoreBtN", score);
                 break;
 
             case "Medium":
-                if (PlayerPrefs.GetInt("MediumScore BtN") < score)
-                    PlayerPrefs.SetInt("MediumScore BtN", score);
+                if (PlayerPrefs.GetInt("MediumScoreBtN") < score)
+                    PlayerPrefs.SetInt("MediumScoreBtN", score);
                 break;
 
             case "Hard":
-                if (PlayerPrefs.GetInt("HardScore BtN") < score)
-                    PlayerPrefs.SetInt("HardScore BtN", score);
+                if (PlayerPrefs.GetInt("HardScoreBtN") < score)
+                    PlayerPrefs.SetInt("HardScoreBtN", score);
                 break;
         }
 
