@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RandomBinary : MonoBehaviour
+public class RandomNumber : MonoBehaviour
 {
-    public TextMeshProUGUI binaryDisplay;
+    public TextMeshProUGUI numberDisplay;
     public TextMeshProUGUI scoreDisplay;
     public TMP_InputField textField;
     public int randomInt;
@@ -22,36 +22,6 @@ public class RandomBinary : MonoBehaviour
         GenerateBinary();
     }
 
-    public void EnterPressed()
-    {
-        if (textField.text.Length == 0)
-        { } // Do nothing. AKA Wait for the player to actually put something inside the textbox
-
-        else if (randomInt.ToString() != textField.text)
-        {
-            CheckHighScore();
-            SceneManager.LoadScene("GameOver");
-        }
-
-        else
-        {
-            score++;
-            scoreDisplay.text = "Score: " + score;
-            GenerateNumber();
-
-            randomSByte = System.Convert.ToSByte(randomInt);
-            GenerateBinary();
-        }
-
-        textField.text = "";
-    }
-
-    public void QuitPressed()
-    {
-        CheckHighScore();
-        SceneManager.LoadScene("GameOver");
-    }
-
     void GenerateNumber()
     {
         if (PlayerPrefs.GetString("Difficulty") == "Easy")
@@ -62,8 +32,10 @@ public class RandomBinary : MonoBehaviour
 
         else if (PlayerPrefs.GetString("Difficulty") == "Hard")
             randomInt = Random.Range(-128, 128);
-    }
 
+        numberDisplay.text = randomInt.ToString();
+    }
+    
     void GenerateBinary()
     {
         string binString = System.Convert.ToString(randomSByte, 2);
@@ -87,7 +59,7 @@ public class RandomBinary : MonoBehaviour
                 break;
 
             case 5:
-                binaryNum = "000" + binString.Substring(0,1) + " " + binString.Substring(1,4);
+                binaryNum = "000" + binString.Substring(0, 1) + " " + binString.Substring(1, 4);
                 break;
 
             case 6:
@@ -106,7 +78,6 @@ public class RandomBinary : MonoBehaviour
                 binaryNum = binString.Substring(8, 4) + " " + binString.Substring(12, 4);
                 break;
         }
-        binaryDisplay.text = binaryNum;
     }
 
     void CheckHighScore()
@@ -115,19 +86,56 @@ public class RandomBinary : MonoBehaviour
         switch (PlayerPrefs.GetString("Difficulty"))
         {
             case "Easy":
-                if (PlayerPrefs.GetInt("EasyScoreBtN") < score)
-                    PlayerPrefs.SetInt("EasyScoreBtN", score);
+                if (PlayerPrefs.GetInt("EasyScoreNtB") < score)
+                    PlayerPrefs.SetInt("EasyScoreNtB", score);
                 break;
 
             case "Medium":
-                if (PlayerPrefs.GetInt("MediumScoreBtN") < score)
-                    PlayerPrefs.SetInt("MediumScoreBtN", score);
+                if (PlayerPrefs.GetInt("MediumScoreNtB") < score)
+                    PlayerPrefs.SetInt("MediumScoreNtB", score);
                 break;
 
             case "Hard":
-                if (PlayerPrefs.GetInt("HardScoreBtN") < score)
-                    PlayerPrefs.SetInt("HardScoreBtN", score);
+                if (PlayerPrefs.GetInt("HardScoreNtB") < score)
+                    PlayerPrefs.SetInt("HardScoreNtB", score);
                 break;
         }
+    }
+
+    void CheckAnswer(string answer)
+    {
+        if (answer == binaryNum)
+        {
+            score++;
+            scoreDisplay.text = "Score: " + score;
+            GenerateNumber();
+            randomSByte = System.Convert.ToSByte(randomInt);
+            GenerateBinary();
+        }
+
+        else
+        {
+            CheckHighScore();
+            SceneManager.LoadScene("GameOver");
+        }
+    }
+
+    public void EnterPressed()
+    {
+        string answer = textField.text;
+        if (answer.Length == 0)
+        { } // Do nothing. AKA Wait for the player to actually put something inside the textbox
+
+        else if (answer.Length == 8)
+            answer = textField.text.Substring(0, 4) + " " + textField.text.Substring(4, 4);
+
+        textField.text = "";
+        CheckAnswer(answer);
+    }
+
+    public void QuitPressed()
+    {
+        CheckHighScore();
+        SceneManager.LoadScene("GameOver");
     }
 }
