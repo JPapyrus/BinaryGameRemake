@@ -11,14 +11,12 @@ public class RandomBinary : MonoBehaviour
     public TMP_InputField textField;
     public int randomInt;
     public string binaryNum;
-    public sbyte randomSByte;
     public int score = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         GenerateNumber();
-        randomSByte = System.Convert.ToSByte(randomInt);
         GenerateBinary();
     }
 
@@ -38,8 +36,6 @@ public class RandomBinary : MonoBehaviour
             score++;
             scoreDisplay.text = "Score: " + score;
             GenerateNumber();
-
-            randomSByte = System.Convert.ToSByte(randomInt);
             GenerateBinary();
         }
 
@@ -66,6 +62,7 @@ public class RandomBinary : MonoBehaviour
 
     void GenerateBinary()
     {
+        sbyte randomSByte = System.Convert.ToSByte(randomInt);
         string binString = System.Convert.ToString(randomSByte, 2);
 
         switch (binString.Length)

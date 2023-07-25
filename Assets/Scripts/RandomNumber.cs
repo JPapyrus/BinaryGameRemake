@@ -11,14 +11,12 @@ public class RandomNumber : MonoBehaviour
     public TMP_InputField textField;
     public int randomInt;
     public string binaryNum;
-    public sbyte randomSByte;
     public int score = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         GenerateNumber();
-        randomSByte = System.Convert.ToSByte(randomInt);
         GenerateBinary();
     }
 
@@ -38,6 +36,7 @@ public class RandomNumber : MonoBehaviour
     
     void GenerateBinary()
     {
+        sbyte randomSByte = System.Convert.ToSByte(randomInt);
         string binString = System.Convert.ToString(randomSByte, 2);
 
         switch (binString.Length)
@@ -109,7 +108,6 @@ public class RandomNumber : MonoBehaviour
             score++;
             scoreDisplay.text = "Score: " + score;
             GenerateNumber();
-            randomSByte = System.Convert.ToSByte(randomInt);
             GenerateBinary();
         }
 
@@ -126,11 +124,14 @@ public class RandomNumber : MonoBehaviour
         if (answer.Length == 0)
         { } // Do nothing. AKA Wait for the player to actually put something inside the textbox
 
-        else if (answer.Length == 8)
-            answer = textField.text.Substring(0, 4) + " " + textField.text.Substring(4, 4);
+        else
+        {
+            if (answer.Length == 8)
+                answer = textField.text.Substring(0, 4) + " " + textField.text.Substring(4, 4);
 
-        textField.text = "";
-        CheckAnswer(answer);
+            textField.text = "";
+            CheckAnswer(answer);
+        }
     }
 
     public void QuitPressed()

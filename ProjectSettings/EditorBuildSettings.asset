@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NumberToBinary.unity
     guid: fcd9453a0370f9e40a0a995b1f208f9e
+  - enabled: 1
+    path: Assets/Scenes/BinaryAddition.unity
+    guid: 8603927ed26caf04ab471eb4c3c02ab1
   m_configObjects: {}
