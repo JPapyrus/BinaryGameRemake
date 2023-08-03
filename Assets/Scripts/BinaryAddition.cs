@@ -56,15 +56,13 @@ public class BinaryAddition : MonoBehaviour
 
         else
         {
-            CheckHighScore();
-            SceneManager.LoadScene("GameOver");
+            StartCoroutine(SoundDelay(0.5f));
         }
     }
 
     public void QuitPressed()
     {
-        CheckHighScore();
-        SceneManager.LoadScene("GameOver");
+        StartCoroutine(SoundDelay(0.5f));
     }
 
     int GenerateNumber()
@@ -148,5 +146,12 @@ public class BinaryAddition : MonoBehaviour
                     PlayerPrefs.SetInt("HardScoreBA", score);
                 break;
         }
+    }
+
+    private IEnumerator SoundDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        CheckHighScore();
+        SceneManager.LoadScene("GameOver");
     }
 }

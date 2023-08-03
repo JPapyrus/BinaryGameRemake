@@ -113,8 +113,7 @@ public class RandomNumber : MonoBehaviour
 
         else
         {
-            CheckHighScore();
-            SceneManager.LoadScene("GameOver");
+            StartCoroutine(SoundDelay(0.5f));
         }
     }
 
@@ -136,6 +135,12 @@ public class RandomNumber : MonoBehaviour
 
     public void QuitPressed()
     {
+        StartCoroutine(SoundDelay(0.5f));
+    }
+    
+    private IEnumerator SoundDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
         CheckHighScore();
         SceneManager.LoadScene("GameOver");
     }

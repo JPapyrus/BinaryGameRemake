@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class RandomBinary : MonoBehaviour
 {
+    public AudioSource buttonSound;
+    public AudioClip wrong;
+    public AudioClip right;
     public TextMeshProUGUI binaryDisplay;
     public TextMeshProUGUI scoreDisplay;
     public TMP_InputField textField;
@@ -27,12 +30,15 @@ public class RandomBinary : MonoBehaviour
 
         else if (randomInt.ToString() != textField.text)
         {
-            CheckHighScore();
-            SceneManager.LoadScene("GameOver");
+            buttonSound.clip = wrong;
+            buttonSound.Play();
+            StartCoroutine(SoundDelay(0.5f));
         }
 
         else
         {
+            buttonSound.clip = right;
+            buttonSound.Play();
             score++;
             scoreDisplay.text = "Score: " + score;
             GenerateNumber();
@@ -44,8 +50,7 @@ public class RandomBinary : MonoBehaviour
 
     public void QuitPressed()
     {
-        CheckHighScore();
-        SceneManager.LoadScene("GameOver");
+        StartCoroutine(SoundDelay(0.5f));
     }
 
     void GenerateNumber()
@@ -126,5 +131,12 @@ public class RandomBinary : MonoBehaviour
                     PlayerPrefs.SetInt("HardScoreBtN", score);
                 break;
         }
+    }
+
+    private IEnumerator SoundDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        CheckHighScore();
+        SceneManager.LoadScene("GameOver");
     }
 }
