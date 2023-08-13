@@ -6,7 +6,7 @@ A remake of a game that we made back in high school.
 - Mouse
 
 # Installation (Windows)
-- Go to release section
+- Go to Releases section
 - Click on BinaryGameRemake1.0.zip
 - Save it wherever you want
 - Extract all the content
